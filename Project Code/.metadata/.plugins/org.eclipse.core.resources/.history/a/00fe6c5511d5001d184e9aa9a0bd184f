@@ -1,0 +1,101 @@
+#include "gpio.h"
+#include "adc.h"
+#include "pwm.h"
+#include "lcd.h"
+#include "dc_motor.h"
+#include "lm35_temp_sensor.h"
+#include <util/delay.h>
+
+void modifyScreen (uint8 temp);
+
+int main (void)
+{
+	DcMotor_Init ();
+	LCD_init ();
+	ADC_init ();
+
+	LCD_moveCursor(0,0);
+	LCD_displayString ("Mini Project II");
+	LCD_moveCursor(1,2);
+	LCD_displayString ("Loading...");
+	_delay_ms (500);
+	LCD_moveCursor(1,2);
+	LCD_displayString ("Loading....");
+	_delay_ms (500);
+	LCD_moveCursor(1,2);
+	LCD_displayString ("Loading... ");
+	_delay_ms (500);
+	LCD_moveCursor(1,2);
+	LCD_displayString ("Loading....");
+	_delay_ms (500);
+	LCD_clearScreen();
+
+	LCD_moveCursor(0,3);
+	LCD_displayString ("FAN is OFF");
+	LCD_moveCursor(1,2);
+	LCD_displayString ("Temp =     C");
+
+	uint8 temp_value = 0;
+	for (;;)
+	{
+
+		temp_value =  LM35_getTemperature ();
+
+		if((temp_value >= 0) || (temp_value < 30))
+		{
+			DcMotor_Rotate(STOP,0);
+			LCD_moveCursor(0,10);
+			LCD_displayString ("OFF");
+			if (temp_value < 10){
+				LCD_moveCursor(1,10);
+				LCD_displayCharacter('  ');
+				LCD_moveCursor(1,9);
+				LCD_intgerToString(temp_value);
+			}
+			else{
+				LCD_moveCursor(1,9);
+				LCD_intgerToString(temp_value);
+			}
+			LCD_moveCursor(1,12);
+			LCD_displayCharacter(' ');
+
+
+
+		}
+		else if ((temp_value >= 30) || (temp_value < 60))
+		{
+			DcMotor_Rotate(CW,25);
+			modifyScreen (temp_value);
+			LCD_displayCharacter(' ');
+		}
+		else if ((temp_value >= 60) || (temp_value < 90))
+		{
+			DcMotor_Rotate(CW,50);
+			modifyScreen (temp_value);
+			LCD_displayCharacter(' ');
+
+		}
+		else if ((temp_value >= 90) || (temp_value < 100))
+		{
+			DcMotor_Rotate(CW,75);
+			modifyScreen (temp_value);
+			LCD_displayCharacter(' ');
+
+		}
+		else if ((temp_value >= 100) || (temp_value <= 120))
+		{
+			DcMotor_Rotate(CW,100);
+			modifyScreen (temp_value);
+		}
+	}
+}
+
+
+void modifyScreen (uint8 temp)
+{
+	LCD_moveCursor(0,10);
+	LCD_displayString ("ON ");
+	LCD_moveCursor(1,9);
+	LCD_intgerToString(temp);
+	LCD_moveCursor(1,12);
+}

@@ -1,0 +1,61 @@
+/*--------------------------------------------------------------------------------
+ * Module: ADC
+ *
+ * File name: adc.h
+ *
+ * Description: header file for adc module
+ *
+ * Author: Mohamed Abdelhamid
+ * -------------------------------------------------------------------------------*/
+
+
+#ifndef ADC_H_
+#define ADC_H_
+
+#include "std_types.h"
+
+////////////////////////////////Definitions/////////////////////////////////////////
+#define POLLING_MODE	/*-POLLING_MODE
+						  -INTERRUPT_MODE*/
+
+#define INTERNAL_VOLTAGE_REFERENCE /*- INTERNAL_VOLTAGE_REFERENCE
+ 	 	 	 	 	 	 	 	 	 - AREF_MODE
+ 	 	 	 	 	 	 	 	 	 - AVCC_MODE*/
+
+#define Maximum_ADC_VALUE 			1023
+#define MINIMUM_ADC_VALUE 			0
+#define ANALOG_REFERENCE_VOLT 		2.56
+///////////////////////////////////external variables///////////////////////////////
+extern volatile uint16 adc;
+//////////////////////////////////type Definitions//////////////////////////////////
+typedef enum{
+	AREF,AVCC= 0x40, INTERNAL = 0xC0
+}ADC_Reference_volt;
+
+
+typedef enum{
+	NO_PRE, PRE_2, PRE_4, PRE_8, PRE_16, PRE_32, PRE_64, PRE_128
+}ADC_Prescaler;
+
+
+typedef struct{
+	ADC_Reference_volt refVolt;
+	ADC_Prescaler	prescaler;
+}ADC_configType;
+
+//////////////////////////////////Prototypes////////////////////////////////////////
+void ADC_init (const ADC_configType * Config_Ptr);
+
+
+
+#ifdef POLLING_MODE
+uint16 ADC_readChannel (uint8 a_channelNumber);
+#endif
+
+
+#ifdef INTERRUPT_MODE
+void ADC_readChannel (uint8 a_channelNumber);
+#endif
+
+
+#endif /* ADC_H_ */

@@ -1,0 +1,30 @@
+/*-----------------------------------------------------------------------------------------------
+ * Module	  : DC Motor
+ * File Name  : dc_motor.h
+ * Description: Header file for DC Motor Module
+ * Author	  : Mohamed Abdelhamid Sayed
+ * ---------------------------------------------------------------------------------------------*/
+
+#ifndef DC_MOTOR_H_
+#define DC_MOTOR_H_
+
+#include "std_types.h"
+
+/************************************************************************************************
+ * 										   Definitions
+ ************************************************************************************************/
+#define PORT_MOTOR_ID				PORTB_ID
+
+#define FIRST_MOTOR_PIN_ID			PIN0_ID
+#define SECOND_MOTOR_PIN_ID			PIN1_ID
+
+/************************************************************************************************
+ * 									  typedef declarations
+ ************************************************************************************************/
+typedef enum  {
+	STOP,CW,Anti_CW
+}DcMotor_State;
+
+
+
+#endif /* DC_MOTOR_H_ */

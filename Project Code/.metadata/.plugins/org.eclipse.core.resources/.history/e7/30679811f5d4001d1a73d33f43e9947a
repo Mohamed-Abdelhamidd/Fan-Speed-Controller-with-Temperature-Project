@@ -1,0 +1,13 @@
+/*-----------------------------------------------------------------------------------------------
+ * Module	  : PWM
+ * File Name  : pwm.c
+ * Description: Source file for PWM Module
+ * Author	  : Mohamed Abdelhamid Sayed
+ * ---------------------------------------------------------------------------------------------*/
+#include "pwm.h"
+
+
+void PWM_timer0_Start (uint8 duty_cycle)
+{
+
+}

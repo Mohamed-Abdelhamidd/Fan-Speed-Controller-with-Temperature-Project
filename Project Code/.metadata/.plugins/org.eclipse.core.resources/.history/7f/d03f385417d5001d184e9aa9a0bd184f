@@ -1,0 +1,22 @@
+/*-----------------------------------------------------------------------------------------------
+ * Module	  : PWM
+ * File Name  : pwm.c
+ * Description: Source file for PWM Module
+ * Author	  : Mohamed Abdelhamid Sayed
+ * ---------------------------------------------------------------------------------------------*/
+#include <avr/io.h>
+#include "pwm.h"
+#include "gpio.h"
+
+void PWM_timer0_Start (uint8 duty_cycle)
+{
+	TCCR0 = (1<<WGM00) | (1<<WGM01) | (1<<COM01) | (1<<CS01);
+	TCNT0 = 0;
+	OCR0 = (uint8)(((uint16)duty_cycle * (265-1)) / 100);;
+	GPIO_setupPinDirection (PORTB_ID, PIN3_ID, PIN_OUTPUT);/*OC0 pin setup direction to o/p*/
+}
+
+stati uint8 result (uint8 data)
+{
+
+}

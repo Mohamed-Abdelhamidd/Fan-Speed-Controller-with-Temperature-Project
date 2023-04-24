@@ -1,0 +1,34 @@
+22:25:45 **** Incremental Build of configuration Debug for project Interface_iii_Project ****
+make all 
+Building file: ../dc_motor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"dc_motor.d" -MT"dc_motor.o" -c -o "dc_motor.o" "../dc_motor.c"
+Finished building: ../dc_motor.c
+ 
+Building target: Interface_iii_Project.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Interface_iii_Project.map -mmcu=atmega32 -o "Interface_iii_Project.elf"  ./adc.o ./dc_motor.o ./gpio.o ./lcd.o ./lm35_temp_sensor.o ./project_application.o ./pwm.o   
+Finished building target: Interface_iii_Project.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Interface_iii_Project.elf  >"Interface_iii_Project.lss"
+Finished building: Interface_iii_Project.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Interface_iii_Project.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:   10604 bytes (32.4% Full)
+(.text + .data + .bootloader)
+
+Data:        350 bytes (17.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+22:25:46 Build Finished. 0 errors, 0 warnings. (took 461ms)
+

@@ -1,0 +1,67 @@
+/*--------------------------------------------------------------------------------
+ * Module: ADC
+ *
+ * File name: adc.c
+ *
+ * Description: source file for ADC module
+ *
+ * Author: Mohamed Abdelhamid
+ * -------------------------------------------------------------------------------*/
+
+
+#include "adc.h"
+#include <avr/io.h>
+#include "common_macros.h"
+#include <avr/interrupt.h>
+
+#ifdef INTERRUPT_MODE
+volatile uint16 adc = 0;
+
+ISR(ADC_vect)
+{
+	adc = ADC;
+}
+#endif
+
+
+/*initialization function for the 10-bits successive approximation ADC*/
+void ADC_init (const ADC_configType * Config_Ptr)
+{
+
+	ADMUX =  (Config_Ptr -> refVolt);
+
+	ADCSRA=  (Config_Ptr -> prescaler);
+
+//	(ADMUX & 0x3F) |
+//			 (ADCSRA & 0xF8)|
+
+#ifdef INTRRUPT_MODE
+	ADCSRA |= (1<<ADIE); /*prescaler 8 & enable the adc(if adc enabled is the gpio at that port wont work*/
+#endif
+
+}
+
+/*function takes the number of channel for the ADC and return the result of conversion */
+
+#ifdef POLLING_MODE
+
+uint16 ADC_readChannel (uint8 a_channelNumber)
+{
+	ADMUX  &= 0xE0;
+	ADMUX  |= (a_channelNumber & 0x07);
+	SET_BIT(ADCSRA, ADSC);
+	while(BIT_IS_CLEAR(ADCSRA,ADIF));
+	SET_BIT(ADCSRA, ADIF);
+	return ADC;
+}
+#endif
+
+#ifdef INTERRUPT_MODE
+
+void ADC_readChannel (uint8 a_channelNumber)
+{
+	ADMUX  &= 0xE0;
+	ADMUX  |= (a_channelNumber & 0x07);
+	SET_BIT(ADCSRA, ADSC);
+}
+#endif

@@ -1,0 +1,16 @@
+06:25:20 **** Incremental Build of configuration Debug for project Interface II_Project ****
+make all 
+Building file: ../pwm.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"pwm.d" -MT"pwm.o" -c -o "pwm.o" "../pwm.c"
+Finished building: ../pwm.c
+ 
+Building target: Interface II_Project.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Interface II_Project.map -mmcu=atmega32 -o "Interface II_Project.elf"  ./adc.o ./dc_motor.o ./gpio.o ./lcd.o ./lm35_temp_sensor.o ./pwm.o   
+avr-gcc.exe: II_Project.map: No such file or directory
+make: *** [Interface II_Project.elf] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+
+06:25:20 Build Failed. 1 errors, 0 warnings. (took 266ms)
+

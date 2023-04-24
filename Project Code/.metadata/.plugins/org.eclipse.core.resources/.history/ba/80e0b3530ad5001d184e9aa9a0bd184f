@@ -1,0 +1,16 @@
+#include "gpio.h"
+#include "adc.h"
+#include "pwm.h"
+#include "lcd.h"
+#include "dc_motor.h"
+#include "lm35_temp_sensor.h"
+
+
+
+int main (void)
+{
+	for (;;)
+	{
+
+	}
+}

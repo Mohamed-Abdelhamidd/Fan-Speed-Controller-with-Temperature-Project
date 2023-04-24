@@ -1,0 +1,45 @@
+/*--------------------------------------------------------------------------------
+ * Module: ADC
+ *
+ * File name: adc.h
+ *
+ * Description: header file for adc module
+ *
+ * Author: Mohamed Abdelhamid
+ * -------------------------------------------------------------------------------*/
+
+
+#ifndef ADC_H_
+#define ADC_H_
+
+#include "std_types.h"
+
+////////////////////////////////Definitions/////////////////////////////////////////
+#define POLLING_MODE	/*POLLING_MODE or INTERRUPT_MODE*/
+#define INTERNAL_VOLTAGE_REFERENCE /*- INTERNAL_VOLTAGE_REFERENCE
+ 	 	 	 	 	 	 	 	 	 - AREF_MODE
+ 	 	 	 	 	 	 	 	 	 - AVCC_MODE*/
+
+#define Maximum_ADC_VALUE 			1023
+#define MINIMUM_ADC_VALUE 			0
+#define ANALOG_REFERENCE_VOLT 		5
+///////////////////////////////////external variables///////////////////////////////
+extern volatile uint16 adc;
+//////////////////////////////////Prototypes////////////////////////////////////////
+
+void ADC_init (void);
+
+
+
+#ifdef POLLING_MODE
+uint16 ADC_readChannel (uint8 a_channelNumber);
+#endif
+
+
+
+#ifdef INTERRUPT_MODE
+void ADC_readChannel (uint8 a_channelNumber);
+#endif
+
+
+#endif /* ADC_H_ */

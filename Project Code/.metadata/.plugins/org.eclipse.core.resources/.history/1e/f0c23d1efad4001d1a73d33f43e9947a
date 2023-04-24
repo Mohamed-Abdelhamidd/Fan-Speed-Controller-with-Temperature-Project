@@ -1,0 +1,18 @@
+/*-----------------------------------------------------------------------------------------------
+ * Module	  : DC Motor
+ * File Name  : dc_motor.c
+ * Description: Source file for DC Motor Module
+ * Author	  : Mohamed Abdelhamid Sayed
+ * ---------------------------------------------------------------------------------------------*/
+
+#include "dc_motor.h"
+#include "gpio.h"
+
+void DcMotor_Init (void)
+{
+
+}
+
+void DcMotor_Rotate(state state,uint8 speed){
+
+}
